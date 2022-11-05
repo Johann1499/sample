@@ -40,108 +40,104 @@
             <hr>
         </form>
 </body>
-    <?php if(isset($_POST['btnCheckout'])): ?>
-
-
-        <h2>Purchase:</h2>
-        <?php
-            $arrSoftdrinks = $_POST['chkSoft'];
-            $size = $_POST['drpOptions'];
-            $quantity = $_POST['txtNumber'];
-        
-        $coke=0;
-        $sprite=0;
-        $royal=0;
-        $pepsi=0;
-        $mdew=0;
-        foreach($arrSoftdrinks as $key => $value){
-            if ($value == "Coke") {
-                if ($size == "Up-size"){
-                    $coke = (15 * $quantity) + (5 * $quantity);
-                }
-                elseif ($size == "Jumbo"){
-                    $coke = (15 * $quantity) + (10 * $quantity);
-                }
-                else{
-                    $coke = 15 * $quantity;
-                }
-            }
-
-            if ($value == "Sprite"){
-                if ($size == "Up-size"){
-                    $sprite = (20 * $quantity) + (5 * $quantity);
-                }
-                elseif ($size == "Jumbo"){
-                    $sprite = (20 * $quantity) + (10 * $quantity);
-                }
-                else{
-                    $sprite = 20 * $quantity;
-                }
-            }
-                
-
-            if ($value == "Royal"){
-                if ($size == "Up-size"){
-                    $royal = (20 * $quantity) + (5 * $quantity);
-                }
-                elseif ($size == "Jumbo"){
-                    $royal = (20 * $quantity) + (10 * $quantity);
-                }
-                else{
-                    $royal = 20 * $quantity;
-                }
-            }
-
-            if ($value == "Pepsi"){
-                if ($size == "Up-size"){
-                    $pepsi = (15 * $quantity) + (5 * $quantity);
-                }
-                elseif ($size == "Jumbo"){
-                    $pepsi = (15 * $quantity) + (10 * $quantity);
-                }
-                else{
-                    $pepsi = 15 * $quantity;
-                }
-            }
-
-            if ($value == "Mountain Dew"){
-                if ($size == "Up-size"){
-                    $mdew = (20 * $quantity) + (5 * $quantity);
-                }
-                elseif ($size == "Jumbo"){
-                    $mdew = (20 * $quantity) + (10 * $quantity);
-                }
-                else{
-                    $mdew = 20 * $quantity;
-                }
-            }
-                
- 
-            }
-        ?>
-        <ul>
+<?php if((isset($_POST['btnCheckout'])) and (!isset($_POST['chkSoft']))):?>
+    <?php echo 'No selected item. Try again.';?>
+    <?php else: ?>
+        <?php if(isset($_POST['btnCheckout'])): ?>
+            <h2>Purchase:</h2>
             <?php
+                $arrSoftdrinks = '';
+                $arrSoftdrinks = $_POST['chkSoft'];
+                $size = $_POST['drpOptions'];
+                $quantity = $_POST['txtNumber'];
+            $coke=0;
+            $sprite=0;
+            $royal=0;
+            $pepsi=0;
+            $mdew=0;
             foreach($arrSoftdrinks as $key => $value){
-                if ($value == "Coke")
-                echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $coke . '</li>';
-                elseif ($value == "Sprite")
-                echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $sprite . '</li>';
-                elseif ($value == "Royal")
-                echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $royal . '</li>';
-                elseif ($value == "Pepsi")
-                echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $pepsi . '</li>';
-                elseif ($value == "Mountain Dew")
-                echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $mdew . '</li>';
-            }
+                if ($value == "Coke") {
+                    if ($size == "Up-size"){
+                        $coke = (15 * $quantity) + (5 * $quantity);
+                    }
+                    elseif ($size == "Jumbo"){
+                        $coke = (15 * $quantity) + (10 * $quantity);
+                    }
+                    else{
+                        $coke = 15 * $quantity;
+                    }
+                }
+                elseif ($value == "Sprite"){
+                    if ($size == "Up-size"){
+                        $sprite = (20 * $quantity) + (5 * $quantity);
+                    }
+                    elseif ($size == "Jumbo"){
+                        $sprite = (20 * $quantity) + (10 * $quantity);
+                    }
+                    else{
+                        $sprite = 20 * $quantity;
+                    }
+                }
+                elseif ($value == "Royal"){
+                    if ($size == "Up-size"){
+                        $royal = (20 * $quantity) + (5 * $quantity);
+                    }
+                    elseif ($size == "Jumbo"){
+                        $royal = (20 * $quantity) + (10 * $quantity);
+                    }
+                    else{
+                        $royal = 20 * $quantity;
+                    }
+                }
+                elseif ($value == "Pepsi"){
+                    if ($size == "Up-size"){
+                        $pepsi = (15 * $quantity) + (5 * $quantity);
+                    }
+                    elseif ($size == "Jumbo"){
+                        $pepsi = (15 * $quantity) + (10 * $quantity);
+                    }
+                    else{
+                        $pepsi = 15 * $quantity;
+                    }
+                }
+                elseif ($value == "Mountain Dew"){
+                    if ($size == "Up-size"){
+                        $mdew = (20 * $quantity) + (5 * $quantity);
+                    }
+                    elseif ($size == "Jumbo"){
+                        $mdew = (20 * $quantity) + (10 * $quantity);
+                    }
+                    else{
+                        $mdew = 20 * $quantity;
+                    }
+                }
+
+                }
             ?>
-        </ul>
-        <b>Total Number of Items: </b>
-        <?php echo (count($arrSoftdrinks) * $quantity);?>
-        <br>
-        <b>Total Amount: </b>
-        <?php
-        $total = $coke + $sprite + $royal + $pepsi + $mdew;
-        echo $total;
-        ?>
+            <ul>
+                <?php
+                foreach($arrSoftdrinks as $key => $value){
+                    if ($value == "Coke")
+                    echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $coke . '</li>';
+                    elseif ($value == "Sprite")
+                    echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $sprite . '</li>';
+                    elseif ($value == "Royal")
+                    echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $royal . '</li>';
+                    elseif ($value == "Pepsi")
+                    echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $pepsi . '</li>';
+                    elseif ($value == "Mountain Dew")
+                    echo '<li>' . $quantity . ' piece' . ($quantity > 1 ? 's ' : ' ' ) . "of $size $value" . ' amounting to ₱ ' . $mdew . '</li>';
+                }
+                ?>
+            </ul>
+            <b>Total Number of Items: </b>
+            <?php echo (count($arrSoftdrinks) * $quantity);?>
+            <br>
+            <b>Total Amount: </b>
+            <?php
+            $total = $coke + $sprite + $royal + $pepsi + $mdew;
+            echo $total;
+            ?>
+            <?php endif; ?>
     <?php endif; ?>
 </html>
